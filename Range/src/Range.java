@@ -36,7 +36,7 @@ class Range {
         return (this.to - number >= -epsilon) && (number - this.from >= -epsilon);
     } */
 
-    Range getIntersectionRange(Range rangeB) {
+    Range getIntersection(Range rangeB) {
         Range rangeC = new Range();
 
         if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
@@ -57,7 +57,7 @@ class Range {
         return rangeC;
     }
 
-    Range[] getCombinedRange(Range rangeB) {
+    Range[] getUnion(Range rangeB) {
         Range rangeC = new Range();
 
         if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
@@ -76,4 +76,12 @@ class Range {
         }
         return new Range[]{new Range(this.from, this.to), rangeB};
     }
+
+/*    Range[] getDifference(Range rangeB) {
+        Range rangeC = new Range();
+
+        if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
+
+        }
+    }*/
 }

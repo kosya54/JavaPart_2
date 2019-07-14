@@ -47,7 +47,7 @@ public class MainRange {
         System.out.printf("Интревал 1: {%.1f : %.1f}, длина интервала = %.0f.%n", rangeA.getFrom(), rangeA.getTo(), rangeA.getLength());
         System.out.printf("Интервал 2: {%.1f : %.1f}, длина интервала = %.0f.%n", rangeB.getFrom(), rangeB.getTo(), rangeB.getLength());
 
-        Range rangeC = rangeA.getIntersectionRange(rangeB);
+        Range rangeC = rangeA.getIntersection(rangeB);
 
         if (rangeC == null) {
             System.out.println("Интервалы не пересекаются.");
@@ -55,7 +55,7 @@ public class MainRange {
             System.out.printf("Интервал пересечения: {%.1f : %.1f}, длина интервала = %.0f.%n", rangeC.getFrom(), rangeC.getTo(), rangeC.getLength());
         }
 
-        Range[] rangeArray = rangeA.getCombinedRange(rangeB);
+        Range[] rangeArray = rangeA.getUnion(rangeB);
 
         if (rangeArray.length > 1) {
             System.out.printf("Объединение интервалов равно: {%.1f : %.1f}, {%.1f : %.1f}", rangeArray[0].getFrom(), rangeArray[0].getTo(), rangeArray[1].getFrom(), rangeArray[1].getTo());
