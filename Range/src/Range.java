@@ -7,10 +7,6 @@ class Range {
         this.to = to;
     }
 
-    private Range() {
-
-    }
-
     double getFrom() {
         return this.from;
     }
@@ -31,57 +27,66 @@ class Range {
         return this.to - this.from;
     }
 
-/*    private boolean isInside(double number) {
+    boolean isInside(double number) {
         double epsilon = 1.0e-10;
         return (this.to - number >= -epsilon) && (number - this.from >= -epsilon);
-    } */
-
-    Range getIntersection(Range rangeB) {
-        Range rangeC = new Range();
-
-        if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
-            if (this.from >= rangeB.getFrom()) {
-                rangeC.setFrom(this.from);
-            } else {
-                rangeC.setFrom(rangeB.getFrom());
-            }
-
-            if (this.to >= rangeB.getTo()) {
-                rangeC.setTo(rangeB.getTo());
-            } else {
-                rangeC.setTo(this.to);
-            }
-        } else {
-            rangeC = null;
-        }
-        return rangeC;
     }
-
-    Range[] getUnion(Range rangeB) {
-        Range rangeC = new Range();
-
-        if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
-            if (this.from >= rangeB.getFrom()) {
-                rangeC.setFrom(rangeB.getFrom());
-            } else {
-                rangeC.setFrom(this.from);
-            }
-
-            if (this.to >= rangeB.getTo()) {
-                rangeC.setTo(this.to);
-            } else {
-                rangeC.setTo(rangeB.getTo());
-            }
-            return new Range[]{rangeC};
+    
+    Range getIntersection(Range range) {
+        if (this.from >= range.getTo() || range.getFrom() >= this.to) {
+            return null;
         }
-        return new Range[]{new Range(this.from, this.to), rangeB};
+        
+        if (this.from <= range.getFrom() && this.to >= range.getTo()) {
+            return new Range(range.getFrom(), range.getTo());
+        }
+        
+        if (this.from >= range.getFrom() && this.to <= range.getTo()) {
+            return new Range(this.from, this.to);
+        }
+        
+        if (this.from >= range.getFrom() && this.to >= range.getTo()) {
+            return new Range(this.from, range.getTo());
+        }
+        return new Range(range.getFrom(), this.to);
     }
-
-/*    Range[] getDifference(Range rangeB) {
-        Range rangeC = new Range();
-
-        if (this.from <= rangeB.getTo() && this.to >= rangeB.getFrom()) {
-
+    
+    Range[] getUnion(Range range) {
+        if (this.from > range.getTo() || range.getFrom() > this.to) {
+            return new Range[] { new Range(this.from, this.to), new Range(range.getFrom(), range.getTo()) };
         }
-    }*/
+        
+        if (this.from <= range.getFrom() && this.to >= range.getTo()) {
+            return new Range[] { new Range(this.from, this.to) };
+        }
+        
+        if (this.from >= range.getFrom() && this.to <= range.getTo() ) {
+            return new Range[] { new Range(range.getFrom(), range.getTo()) };
+        }
+        
+        if (this.from >= range.getFrom() && this.to >= range.getTo()) {
+            return new Range[] { new Range(range.getFrom(), this.to) };
+        }
+        
+        return new Range[] { new Range(this.from, range.getTo()) };
+    }
+    
+    Range[] getDifference(Range range) {
+        if (this.from > range.getTo() || range.getFrom() > this.to) {
+            return new Range[] { new Range(this.from, this.to) };
+        }
+        
+        if (this.from < range.getFrom() && this.to > range.getTo()) {
+            return new Range[] { new Range(this.from, range.getFrom()), new Range(range.getTo(), this.to) };
+        }
+        
+        if (this.from < range.getFrom() && this.to <= range.getTo()) {
+            return new Range[] { new Range(this.from, range.getFrom()) };
+        }
+        
+        if (this.from >= range.getFrom() && this.to <= range.getTo()) {
+            return new Range[] { };
+        }
+        return new Range[] { new Range(range.getTo(), this.to) };
+    }
 }
