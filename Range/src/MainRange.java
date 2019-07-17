@@ -64,7 +64,7 @@ public class MainRange {
         } else if (range1.getDifference(range2).length > 1) {
             System.out.printf("Разность интервалов: {%.1f : %.1f}, {%.1f : %.1f}%n", range1.getDifference(range2)[0].getFrom(), range1.getDifference(range2)[0].getTo(), range1.getDifference(range2)[1].getFrom(), range1.getDifference(range2)[1].getTo());
         } else {
-            System.out.println("Разность интервало: 0%n");
+            System.out.println("Разность интервало: 0");
         }
     }
 }
