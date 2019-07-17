@@ -46,19 +46,19 @@ public class MainRange {
 
         System.out.printf("Интревал 1: {%.1f : %.1f}, длина интервала = %.0f.%n", range1.getFrom(), range1.getTo(), range1.getLength());
         System.out.printf("Интервал 2: {%.1f : %.1f}, длина интервала = %.0f.%n", range2.getFrom(), range2.getTo(), range2.getLength());
-        
+
         if (range1.getIntersection(range2) == null) {
             System.out.println("null");
         } else {
             System.out.printf("Интервал пересечения: {%.1f : %.1f}%n", range1.getIntersection(range2).getFrom(), range1.getIntersection(range2).getTo());
         }
-        
+
         if (range1.getUnion(range2).length == 1) {
             System.out.printf("Интервал объединения: {%.1f : %.1f}%n", range1.getUnion(range2)[0].getFrom(), range1.getUnion(range2)[0].getTo());
         } else {
             System.out.printf("Интервалы объединения: {%.1f : %.1f}, {%.1f : %.1f}%n", range1.getUnion(range2)[0].getFrom(), range1.getUnion(range2)[0].getTo(), range1.getUnion(range2)[1].getFrom(), range1.getUnion(range2)[1].getTo());
         }
-        
+
         if (range1.getDifference(range2).length != 0) {
             System.out.printf("Разность интервалов: {%.1f : %.1f}%n", range1.getDifference(range2)[0].getFrom(), range1.getDifference(range2)[0].getTo());
         } else if (range1.getDifference(range2).length > 1) {
