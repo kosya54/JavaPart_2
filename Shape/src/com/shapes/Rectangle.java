@@ -1,4 +1,6 @@
-package com.shape;
+package com.shapes;
+
+import com.interfaces.Shape;
 
 public class Rectangle implements Shape {
     private double width;
@@ -9,18 +11,22 @@ public class Rectangle implements Shape {
         this.height = height;
     }
 
+    @Override
     public double getWidth() {
         return width;
     }
 
+    @Override
     public double getHeight() {
         return height;
     }
 
+    @Override
     public double getArea() {
         return width * height;
     }
 
+    @Override
     public double getPerimeter() {
         return 2 * (width + height);
     }

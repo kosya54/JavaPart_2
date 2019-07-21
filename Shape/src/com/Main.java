@@ -1,34 +1,36 @@
 package com;
 
-import com.shape.*;
+import com.comparators.*;
+import com.interfaces.Shape;
+import com.shapes.*;
 import java.util.ArrayList;
 
 class Main {
     public static void main(String[] args) {
         ArrayList<Shape> shapes = new ArrayList<>();
 
-        Rectangle rectangle1 = new Rectangle(20, 30);
+        Shape rectangle1 = new Rectangle(20, 30);
         shapes.add(rectangle1);
 
-        Rectangle rectangle2 = new Rectangle(20, 30);
+        Shape rectangle2 = new Rectangle(20, 30);
         shapes.add(rectangle2);
 
-        Circle circle1 = new Circle(15);
+        Shape circle1 = new Circle(15);
         shapes.add(circle1);
 
-        Circle circle2 = new Circle(30);
+        Shape circle2 = new Circle(30);
         shapes.add(circle2);
 
-        Square square1 = new Square(10);
+        Shape square1 = new Square(10);
         shapes.add(square1);
 
-        Square square2 = new Square(50);
+        Shape square2 = new Square(50);
         shapes.add(square2);
 
-        Triangle triangle1 = new Triangle(5, 7, 9, 11, 2, 4);
+        Shape triangle1 = new Triangle(5, 7, 9, 11, 2, 4);
         shapes.add(triangle1);
 
-        Triangle triangle2 = new Triangle(1, 3, 5, 7, 9, 11);
+        Shape triangle2 = new Triangle(1, 3, 5, 7, 9, 11);
         shapes.add(triangle2);
 
         System.out.printf("Фигура с максимальной площадью.%n%s%n%n", findMaxArea(shapes).toString());

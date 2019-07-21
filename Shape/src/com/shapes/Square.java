@@ -1,26 +1,32 @@
-package com.shape;
+package com.shapes;
 
-public class Circle implements Shape {
-    private double radius;
+import com.interfaces.Shape;
 
-    public Circle(double radius) {
-        this.radius = radius;
+public class Square implements Shape {
+    private double width;
+
+    public Square(double width) {
+        this.width = width;
     }
 
+    @Override
     public double getWidth() {
-        return 2 * radius;
+        return this.width;
     }
 
+    @Override
     public double getHeight() {
-        return 2 * radius;
+        return this.getWidth();
     }
 
+    @Override
     public double getArea() {
-        return Math.PI * Math.pow(radius, 2);
+        return Math.pow(this.width, 2);
     }
 
+    @Override
     public double getPerimeter() {
-        return 2 * Math.PI * radius;
+        return 4 * this.width;
     }
 
     @Override
@@ -38,9 +44,9 @@ public class Circle implements Shape {
             return false;
         }
 
-        Circle circle = (Circle) object;
+        Square square = (Square) object;
 
-        return getWidth() == circle.getWidth() && getHeight() == circle.getHeight() && getArea() == circle.getArea() && getPerimeter() == circle.getPerimeter();
+        return getWidth() == square.getWidth() && getHeight() == square.getHeight() && getArea() == square.getArea() && getPerimeter() == square.getPerimeter();
     }
 
     @Override
@@ -48,7 +54,7 @@ public class Circle implements Shape {
         final int prime = 7;
         int hash = 1;
 
-        hash = prime * hash + Double.hashCode(radius);
+        hash = prime * hash + Double.hashCode(width);
         return hash;
     }
 }

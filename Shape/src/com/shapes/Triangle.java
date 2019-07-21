@@ -1,4 +1,6 @@
-package com.shape;
+package com.shapes;
+
+import com.interfaces.Shape;
 
 public class Triangle implements Shape {
     private double x1;
@@ -17,18 +19,22 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
+    @Override
     public double getWidth() {
         return getMax(x1, x2, x3) - getMin(x1, x2, x3);
     }
 
+    @Override
     public double getHeight() {
         return getMax(y1, y2, y3) - getMin(y1, y2, y3);
     }
 
+    @Override
     public double getArea() {
         return (getWidth() * getHeight()) / 2;
     }
 
+    @Override
     public double getPerimeter() {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) + Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2)) + Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
     }

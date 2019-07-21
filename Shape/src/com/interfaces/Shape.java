@@ -1,4 +1,4 @@
-package com.shape;
+package com.interfaces;
 
 public interface Shape {
     double getWidth();
