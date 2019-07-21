@@ -1,6 +1,9 @@
+package com;
+
+import com.shape.*;
 import java.util.ArrayList;
 
-class MainShape {
+class Main {
     public static void main(String[] args) {
         ArrayList<Shape> shapes = new ArrayList<>();
 

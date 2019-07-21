@@ -1,7 +1,9 @@
-class Square implements Shape {
+package com.shape;
+
+public class Square implements Shape {
     private double width;
 
-    Square(double width) {
+    public Square(double width) {
         this.width = width;
     }
 

@@ -1,14 +1,16 @@
+package com.shape;
+
 import java.util.Comparator;
 
-class PerimeterComparator implements Comparator<Shape> {
+public class AreaComparator implements Comparator<Shape> {
 
     public int compare(Shape shape1, Shape shape2) {
         final double EPSILON = 1.0e-10;
-        if (Math.abs(shape1.getPerimeter() - shape2.getPerimeter()) <= EPSILON) {
+        if (Math.abs(shape1.getArea() - shape2.getArea()) <= EPSILON) {
             return 0;
         }
 
-        if (shape1.getPerimeter() - shape2.getPerimeter() > EPSILON) {
+        if (shape1.getArea() - shape2.getArea() > EPSILON) {
             return 1;
         }
         return -1;

@@ -1,3 +1,5 @@
+package com.shape;
+
 public interface Shape {
     double getWidth();
     double getHeight();
