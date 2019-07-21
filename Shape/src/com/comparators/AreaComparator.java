@@ -1,6 +1,7 @@
 package com.comparators;
 
 import com.interfaces.Shape;
+
 import java.util.Comparator;
 
 public class AreaComparator implements Comparator<Shape> {
