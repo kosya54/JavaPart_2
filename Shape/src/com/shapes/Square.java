@@ -11,22 +11,22 @@ public class Square implements Shape {
 
     @Override
     public double getWidth() {
-        return this.width;
+        return width;
     }
 
     @Override
     public double getHeight() {
-        return this.getWidth();
+        return getWidth();
     }
 
     @Override
     public double getArea() {
-        return Math.pow(this.width, 2);
+        return Math.pow(width, 2);
     }
 
     @Override
     public double getPerimeter() {
-        return 4 * this.width;
+        return 4 * width;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Square implements Shape {
             return true;
         }
 
-        if (object == null || object.getClass() != this.getClass()) {
+        if (object == null || object.getClass() != getClass()) {
             return false;
         }
 
