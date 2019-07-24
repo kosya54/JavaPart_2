@@ -34,8 +34,8 @@ class Main {
         Shape triangle2 = new Triangle(1, 3, 5, 7, 9, 11);
         shapes.add(triangle2);
 
-        System.out.printf("Фигура с максимальной площадью.%n%s%n%n", findMaxArea(shapes).toString());
-        System.out.printf("Фигура с вторым по величине периметром.%n%s%n%n", findSecondMaxPerimeter(shapes).toString());
+        System.out.printf("Фигура с максимальной площадью.%n%s%n%n", getMaxAreaShape(shapes).toString());
+        System.out.printf("Фигура с вторым по величине периметром.%n%s%n%n", getSecondMaxPerimeterShape(shapes).toString());
 
         System.out.printf("rectangle1 == rectangle2 ? %b%n", rectangle1.equals(rectangle2));
         System.out.printf("circle1 == circle2 ? %b%n", circle1.equals(circle2));
@@ -43,14 +43,14 @@ class Main {
         System.out.printf("triangle1 == triangle2 ? %b", triangle1.equals(triangle2));
     }
 
-    private static Shape findMaxArea(ArrayList<Shape> shapes) {
+    private static Shape getMaxAreaShape(ArrayList<Shape> shapes) {
         AreaComparator areaComparator = new AreaComparator();
         shapes.sort(areaComparator);
 
         return shapes.get(shapes.size() - 1);
     }
 
-    private static Shape findSecondMaxPerimeter(ArrayList<Shape> shapes) {
+    private static Shape getSecondMaxPerimeterShape(ArrayList<Shape> shapes) {
         PerimeterComparator perimeterComparator = new PerimeterComparator();
         shapes.sort(perimeterComparator);
 

@@ -31,7 +31,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return String.format("Ширина: %.2f.%nВысота: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getWidth(), getHeight(), getArea(), getPerimeter(), hashCode());
+        return String.format("Фигура: %s.%nРадиус: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getClass().getSimpleName(), radius, getArea(), getPerimeter(), hashCode());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Circle implements Shape {
 
         Circle circle = (Circle) object;
 
-        return getWidth() == circle.getWidth() && getHeight() == circle.getHeight() && getArea() == circle.getArea() && getPerimeter() == circle.getPerimeter();
+        return radius == circle.radius;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Square implements Shape {
 
     @Override
     public String toString() {
-        return String.format("Ширина: %.2f.%nВысота: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getWidth(), getHeight(), getArea(), getPerimeter(), hashCode());
+        return String.format("Фигура: %s.%nШирина: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getClass().getSimpleName(), width, getArea(), getPerimeter(), hashCode());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Square implements Shape {
 
         Square square = (Square) object;
 
-        return getWidth() == square.getWidth() && getHeight() == square.getHeight() && getArea() == square.getArea() && getPerimeter() == square.getPerimeter();
+        return width == square.width;
     }
 
     @Override

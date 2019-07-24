@@ -33,7 +33,7 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return String.format("Ширина: %.2f.%nВысота: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getWidth(), getHeight(), getArea(), getPerimeter(), hashCode());
+        return String.format("Фигура: %s.%nШирина: %.2f.%nВысота: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getClass().getSimpleName(), width, height, getArea(), getPerimeter(), hashCode());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Rectangle implements Shape {
 
         Rectangle rectangle = (Rectangle) object;
 
-        return getWidth() == rectangle.getWidth() && getHeight() == rectangle.getHeight() && getArea() == rectangle.getArea() && getPerimeter() == rectangle.getPerimeter();
+        return width == rectangle.width && height == rectangle.height;
     }
 
     @Override
