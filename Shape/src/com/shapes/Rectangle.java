@@ -33,7 +33,13 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return String.format("Фигура: %s.%nШирина: %.2f.%nВысота: %.2f.%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getClass().getSimpleName(), width, height, getArea(), getPerimeter(), hashCode());
+        return String.format("Фигура: %s.%n" +
+                             "Ширина: %.2f.%n" +
+                             "Высота: %.2f.%n" +
+                             "Площадь: %.2f.%n" +
+                             "Периметр: %.2f.%n" +
+                             "Хэш: %d.",
+                             getClass().getSimpleName(), width, height, getArea(), getPerimeter(), hashCode());
     }
 
     @Override

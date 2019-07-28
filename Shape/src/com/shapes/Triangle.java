@@ -36,12 +36,17 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) + Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2)) + Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) +
+               Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2)) +
+               Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
     }
 
     @Override
     public String toString() {
-        return String.format("Фигура: %s.%nКоординаты вершин: A(%.2f, %.2f), B(%.2f, %.2f), C(%.2f, %.2f).%nПлощадь: %.2f.%nПериметр: %.2f.%nХэш: %d.", getClass().getSimpleName(), x1, y1, x2, y2, x3, y3, getArea(), getPerimeter(), hashCode());
+        return String.format("Фигура: %s.%n" +
+                             "Координаты вершин: A(%.2f, %.2f), B(%.2f, %.2f), C(%.2f, %.2f).%n" +
+                             "Площадь: %.2f.%nПериметр: %.2f.%nХэш: %d.",
+                             getClass().getSimpleName(), x1, y1, x2, y2, x3, y3, getArea(), getPerimeter(), hashCode());
     }
 
     @Override
@@ -56,7 +61,9 @@ public class Triangle implements Shape {
 
         Triangle triangle = (Triangle) object;
 
-        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 && y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3;
+        return x1 == triangle.x1 && x2 == triangle.x2 &&
+               x3 == triangle.x3 && y1 == triangle.y1 &&
+               y2 == triangle.y2 && y3 == triangle.y3;
     }
 
     @Override
