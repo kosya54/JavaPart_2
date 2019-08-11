@@ -28,13 +28,13 @@ class Main {
         System.out.printf("Вектор2 == Вектор3 ? %b%nХэш Вектор2: %d%nХэш Вектор3: %d%n%n", vector2.equals(vector3), vector2.hashCode(), vector3.hashCode());
         System.out.println();
 
-        vector1.sum(vector2);
+        vector1.summarize(vector2);
         System.out.printf("Вектор1 + Вектор2 = %s%n", vector1.toString());
 
-        vector4.subtraction(vector3);
+        vector4.subtract(vector3);
         System.out.printf("Вектор4 - Вектор3 = %s%n", vector4.toString());
 
-        vector2.multiplication(22);
+        vector2.multiply(22);
         System.out.printf("Вектор2 * 22 = %s%n", vector2.toString());
 
         vector3.inverse();

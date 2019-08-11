@@ -16,7 +16,7 @@ public class Circle implements Shape {
 
     @Override
     public double getHeight() {
-        return 2 * radius;
+        return getWidth();
     }
 
     @Override

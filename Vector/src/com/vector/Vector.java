@@ -29,10 +29,6 @@ public class Vector {
             throw new IllegalArgumentException("n не должно быть <= 0!");
         }
 
-        if (array.length == 0) {
-            throw new IllegalArgumentException("Вектор не может быть нулевой длины!");
-        }
-
         components = Arrays.copyOf(array, n);
     }
 
@@ -73,31 +69,27 @@ public class Vector {
         return Arrays.hashCode(components);
     }
 
-    public void sum(Vector vector) {
+    public void summarize(Vector vector) {
         if (components.length < vector.components.length) {
             components = Arrays.copyOf(components, vector.components.length);
         }
 
-        int minLength = Math.min(components.length, vector.components.length);
-
-        for (int i = 0; i < minLength; i++) {
+        for (int i = 0; i < vector.components.length; i++) {
             components[i] += vector.components[i];
         }
     }
 
-    public void subtraction(Vector vector) {
+    public void subtract(Vector vector) {
         if (components.length < vector.components.length) {
             components = Arrays.copyOf(components, vector.components.length);
         }
 
-        int minLength = Math.min(components.length, vector.components.length);
-
-        for (int i = 0; i < minLength; i++) {
+        for (int i = 0; i < vector.components.length; i++) {
             components[i] -= vector.components[i];
         }
     }
 
-    public void multiplication(double number) {
+    public void multiply(double number) {
         for (int i = 0; i < components.length; i++) {
             components[i] *= number;
         }
@@ -105,7 +97,7 @@ public class Vector {
 
     public void inverse() {
         final double INVERSE = -1;
-        multiplication(INVERSE);
+        multiply(INVERSE);
     }
 
     public double getLength() {
@@ -122,30 +114,30 @@ public class Vector {
 
     public double getComponentByIndex(int index) {
         if (index > components.length || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Не верное значение индекса.");
+            throw new IllegalArgumentException("Не верное значение индекса.");
         }
         return components[index];
     }
 
     public void setComponentByIndex(int index, double value) {
         if (index > components.length || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Не верное значение индекса.");
+            throw new IllegalArgumentException("Не верное значение индекса.");
         }
         components[index] = value;
     }
 
     public static Vector getSum(Vector vector1, Vector vector2) {
-        Vector vector3 = new Vector(vector1);
-        vector3.sum(vector2);
+        Vector newVector = new Vector(vector1);
+        newVector.summarize(vector2);
 
-        return vector3;
+        return newVector;
     }
 
     public static Vector getSubtraction(Vector vector1, Vector vector2) {
-        Vector vector3 = new Vector(vector1);
-        vector3.subtraction(vector2);
+        Vector newVector = new Vector(vector1);
+        newVector.subtract(vector2);
 
-        return vector3;
+        return newVector;
     }
 
     public static double getMultiplication(Vector vector1, Vector vector2) {
