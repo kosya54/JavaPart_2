@@ -23,12 +23,11 @@ class Main {
         System.out.println("Вектор4: " + vector4.toString());
         System.out.println();
 
-
         System.out.printf("Вектор1 == Вектор2 ? %b%nХэш Вектор1: %d%nХэш Вектор2: %d%n%n", vector1.equals(vector2), vector1.hashCode(), vector2.hashCode());
         System.out.printf("Вектор2 == Вектор3 ? %b%nХэш Вектор2: %d%nХэш Вектор3: %d%n%n", vector2.equals(vector3), vector2.hashCode(), vector3.hashCode());
         System.out.println();
 
-        vector1.summarize(vector2);
+        vector1.sum(vector2);
         System.out.printf("Вектор1 + Вектор2 = %s%n", vector1.toString());
 
         vector4.subtract(vector3);
@@ -49,6 +48,7 @@ class Main {
 
         System.out.printf("Компонента Вектор3 по индексу 5 равна: %f%n", vector3.getComponentByIndex(5));
         System.out.println("Меняем компоненту Вектор3 по индексу 5 на 22.");
+
         vector3.setComponentByIndex(5, 22);
         System.out.printf("Компонента Вектор3 по индексу 5 равна: %f%n", vector3.getComponentByIndex(5));
         System.out.println();

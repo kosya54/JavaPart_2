@@ -18,8 +18,8 @@ class ArrayListHome {
                 strings.add(scanner.nextLine());
             }
             System.out.println(strings);
-        } catch (FileNotFoundException error) {
-            System.out.println("Нет такого файла!" + error);
+        } catch (FileNotFoundException e) {
+            System.out.println("Нет такого файла!" + e);
         }
         System.out.println();
 

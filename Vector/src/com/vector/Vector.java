@@ -69,7 +69,7 @@ public class Vector {
         return Arrays.hashCode(components);
     }
 
-    public void summarize(Vector vector) {
+    public void sum(Vector vector) {
         if (components.length < vector.components.length) {
             components = Arrays.copyOf(components, vector.components.length);
         }
@@ -113,22 +113,22 @@ public class Vector {
     }
 
     public double getComponentByIndex(int index) {
-        if (index > components.length || index < 0) {
-            throw new IllegalArgumentException("Не верное значение индекса.");
+        if (index >= components.length || index < 0) {
+            throw new IndexOutOfBoundsException("Не верное значение индекса.");
         }
         return components[index];
     }
 
     public void setComponentByIndex(int index, double value) {
-        if (index > components.length || index < 0) {
-            throw new IllegalArgumentException("Не верное значение индекса.");
+        if (index >= components.length || index < 0) {
+            throw new IndexOutOfBoundsException("Не верное значение индекса.");
         }
         components[index] = value;
     }
 
     public static Vector getSum(Vector vector1, Vector vector2) {
         Vector newVector = new Vector(vector1);
-        newVector.summarize(vector2);
+        newVector.sum(vector2);
 
         return newVector;
     }
