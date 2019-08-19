@@ -11,6 +11,8 @@ public class Main {
         list.addFirst(3);
         list.addFirst(4);
 
+        System.out.println("First item data: " + list.getFirstItemData());
+
         list.printList();
         System.out.println("Size: " + list.size());
 

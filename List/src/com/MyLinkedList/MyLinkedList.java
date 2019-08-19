@@ -93,7 +93,7 @@ public class MyLinkedList<T> {
 
     //Копирование списка
 
-    public void printLinks() {
+/*    public void printLinks() {
         ListItem<T> p = head;
 
         System.out.println("Head: " + p);
@@ -101,7 +101,7 @@ public class MyLinkedList<T> {
             System.out.println("Elem: " + p.getNext());
             p = p.getNext();
         }
-    }
+    } */
 
     public void printList() {
         ListItem<T> item = head;
