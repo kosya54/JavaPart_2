@@ -6,6 +6,17 @@ public class Main {
     public static void main(String[] args) {
         MyLinkedList<Integer> list = new MyLinkedList<>();
 
+        list.addFirstItem(1);
+        list.addFirstItem(2);
+        list.addFirstItem(3);
+        list.addFirstItem(4);
+        list.printList();
+
+        System.out.println(list.removeItemByData(0));
+        list.printList();
+
+/*        MyLinkedList<Integer> list = new MyLinkedList<>();
+
         list.addFirst(1);
         list.addFirst(2);
         list.addFirst(3);
@@ -26,5 +37,19 @@ public class Main {
 
         System.out.println(list.removeFirst());
         list.printList();
+
+        System.out.println("Удалено? " + list.removeByData(4));
+        list.printList();
+
+        System.out.println("Удаленный элемент: " + list.removeByIndex(2));
+        list.printList();
+
+        list.printList();
+        list.printLinks();
+
+        MyLinkedList<Integer> copyList = list.copy();
+
+        copyList.printList();
+        copyList.printLinks(); */
     }
 }

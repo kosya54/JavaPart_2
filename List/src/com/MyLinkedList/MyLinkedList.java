@@ -7,116 +7,180 @@ public class MyLinkedList<T> {
     public MyLinkedList() {
     }
 
-    //Получение размера списка +
+    //Получение размера списка
     public int size() {
         return count;
     }
 
-    //Получение значения первого элемента +
+    //Получение значение первого элемента
     public T getFirstItemData() {
         return head.getData();
     }
 
-    //Получение значения по указанному индексу +
-    public T getByIndex(int index) {
-        if (index <= 0 || index > count) {
-            throw new IndexOutOfBoundsException("Не верное значение индекса.");
+    //Получение значения по указанному индексу
+    public T getItemDataByIndex(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Не верное значение индекса");
         }
 
-        ListItem<T> receivedItem= head;
-        for (int i = 1; i < index; i++) {
-            receivedItem = receivedItem.getNext();
+        if (index == 0) {
+            return getFirstItemData();
         }
-        return receivedItem.getData();
+
+        ListItem<T> nextLink = head;
+        for (int i = 0; i < index; i++) {
+            nextLink = nextLink.getNext();
+        }
+        return nextLink.getData();
     }
 
-    //Изменение значения по индексу пусть выдает старое значение +
-    public T replaceByIndex(int index, T data) {
-        if (index <= 0 || index > count) {
-            throw new IndexOutOfBoundsException("Не верное значение индекса.");
+    //Изменение значения по указанному индексу пусть выдает старое значение
+    public T replaceItemDataByIndex(int index, T data) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Не верное значение индекса");
         }
 
-        ListItem<T> replaceableItem = head;
-        for (int i = 1; i < index; i++) {
-            replaceableItem = replaceableItem.getNext();
+        ListItem<T> nextLink = head;
+        for (int i = 0; i < index; i++) {
+            nextLink = nextLink.getNext();
         }
 
-        T oldItemData = replaceableItem.getData();
-        replaceableItem.setData(data);
-
+        T oldItemData = nextLink.getData();
+        nextLink.setData(data);
         return oldItemData;
     }
 
     //Удаление элемента по индексу, пусть выдает значение элемента
+    public T removeItemByIndex(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Не верное значение индекса");
+        }
 
-    //Вставка элемента в начало +
-    public void addFirst(T data) {
-        head = new ListItem<>(data, head);
+        if (index == 0) {
+            return removeFirstItem();
+        }
+
+        ListItem<T> nextLink = head;
+        ListItem<T> prevLink = null;
+        for (int i = 0; i < index; i++) {
+            prevLink = nextLink;
+            nextLink = nextLink.getNext();
+        }
+
+        T removableItemData = nextLink.getData();
+        prevLink.setNext(nextLink.getNext());
+
+        --count;
+        return removableItemData;
+    }
+
+    //Вставка элемента в начало
+    public void addFirstItem(T data) {
+        head = new ListItem<>(head, data);
+
         ++count;
     }
 
-    //Вставка элемента по индексу +
-    public void addByIndex(int index, T data) {
-        if (index <= 0 || index > count) {
-            throw new IndexOutOfBoundsException("Не верное значение индекса.");
+    //Вставка элемента по индексу
+    public void addItemByIndex(int index, T data) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Не верное значение индекса");
         }
 
-        if (index == 1) {
-            addFirst(data);
+        if (index == 0) {
+            addFirstItem(data);
         } else {
-            ListItem<T> link = head;
-            ListItem<T> prev = null;
+            ListItem<T> nextLink = head;
+            ListItem<T> prevLink = null;
 
-            for (int i = 1; i < index; i++) {
-                prev = link;
-                link = link.getNext();
+            for (int i = 0; i < index; i++) {
+                prevLink = nextLink;
+                nextLink = nextLink.getNext();
             }
 
-            ListItem<T> newItem = new ListItem<>(data, link);
-            prev.setNext(newItem);
+            ListItem<T> newItem = new ListItem<>(nextLink, data);
+            prevLink.setNext(newItem);
+
             ++count;
         }
     }
 
-    //удаление узла по значению, пусть выдает true, если элемент был удален
+    //Удаление узла по значению, пусть выдает true, если элемент был удален
+    public boolean removeItemByData(T data) {
+        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.getNext()) {
+            if (data == head.getData()) {
+                removeFirstItem();
+                return true;
+            }
 
-    //Удаление первого элемента, пусть выдет значение элемента
-    public T removeFirst() {
-        T removedItemData = head.getData();
+            if (nextLink.getData() == data) {
+                prevLink.setNext(nextLink.getNext());
+                nextLink.setNext(null);
+
+                --count;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Удаление первого элемента, пусть выдает значение элемента
+    public T removeFirstItem() {
+        T removableItemData = head.getData();
+
         head = head.getNext();
+
         --count;
 
-        return removedItemData;
+        return removableItemData;
     }
 
     //Разворот списка за линейное время
 
-    //Копирование списка
+    //копирование списка
 
-/*    public void printLinks() {
+    //Временно
+    public void printList() {
+        ListItem<T> nextLink = head;
+
+        while (nextLink != null) {
+            System.out.println("Адрес: " + nextLink.getNext() + " Значение: " + nextLink.getData() + " Count: " + size());
+            nextLink = nextLink.getNext();
+        }
+    }
+
+    public void printLinks() {
         ListItem<T> p = head;
-
         System.out.println("Head: " + p);
         while (p != null) {
             System.out.println("Elem: " + p.getNext());
             p = p.getNext();
         }
-    } */
+    }
 
-    public void printList() {
-        ListItem<T> item = head;
+    private class ListItem<T> {
+        private ListItem<T> next;
+        private T data;
 
-        System.out.print("[ ");
-        int count = 1;
-        while (item != null) {
-            if (count == size()) {
-                System.out.print(item.getData());
-            } else {
-                System.out.print(item.getData() + ", ");
-            }
-            item = item.getNext();
-            ++count;
+        ListItem(ListItem<T> next, T data) {
+            this.next = next;
+            this.data = data;
         }
-        System.out.println(" ]");
+
+        private ListItem<T> getNext() {
+            return next;
+        }
+
+        private void setNext(ListItem<T> next) {
+            this.next = next;
+        }
+
+        private T getData() {
+            return data;
+        }
+
+        private void setData(T data) {
+            this.data = data;
+        }
     }
 }
