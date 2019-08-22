@@ -4,9 +4,10 @@ public class MyLinkedList<T> {
     private ListItem<T> head;
     private int count;
 
-    public MyLinkedList() {}
-    
-    private class ListItem<T> {
+    public MyLinkedList() {
+    }
+
+    private static class ListItem<T> {
         private ListItem<T> next;
         private T data;
 
@@ -15,32 +16,22 @@ public class MyLinkedList<T> {
             this.data = data;
         }
 
-        private ListItem<T> getNext() {
-            return next;
-        }
-
         private void setNext(ListItem<T> next) {
             this.next = next;
-        }
-
-        private T getData() {
-            return data;
         }
 
         private void setData(T data) {
             this.data = data;
         }
     }
-    
-    //Вставка элемента в начало
+
     public void addFirstItem(T data) {
         head = new ListItem<>(head, data);
 
         ++count;
     }
-    
-    //Вставка элемента по индексу
-    public void addItemByIndex(int index, T data) {
+
+    public void addByIndex(int index, T data) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Не верное значение индекса");
         }
@@ -62,37 +53,33 @@ public class MyLinkedList<T> {
             ++count;
         }
     }
-    
-    //Копирование списка
+
     public MyLinkedList<T> copyMyLinkedList() {
         MyLinkedList<T> copyList = new MyLinkedList<>();
-        
-        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.next) {
+
+        for (ListItem<T> nextLink = head; nextLink != null; nextLink = nextLink.next) {
             copyList.addFirstItem(nextLink.data);
         }
-        
+
         copyList.reverseMyLinkedList();
         return copyList;
     }
 
-    //Получение размера списка
     public int size() {
         return count;
     }
 
-    //Получение значение первого элемента
-    public T getFirstItemData() {
+    public T getFirstData() {
         return head.data;
     }
 
-    //Получение значения по указанному индексу
-    public T getItemDataByIndex(int index) {
+    public T getDataByIndex(int index) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Не верное значение индекса");
         }
 
         if (index == 0) {
-            return getFirstItemData();
+            return getFirstData();
         }
 
         ListItem<T> nextLink = head;
@@ -102,8 +89,7 @@ public class MyLinkedList<T> {
         return nextLink.data;
     }
 
-    //Изменение значения по указанному индексу пусть выдает старое значение
-    public T replaceItemDataByIndex(int index, T data) {
+    public T replaceDataByIndex(int index, T data) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Не верное значение индекса");
         }
@@ -115,17 +101,17 @@ public class MyLinkedList<T> {
 
         T oldItemData = nextLink.data;
         nextLink.setData(data);
+
         return oldItemData;
     }
 
-    //Удаление элемента по индексу, пусть выдает значение элемента
-    public T removeItemByIndex(int index) {
+    public T removeByIndex(int index) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Не верное значение индекса");
         }
 
         if (index == 0) {
-            return removeFirstItem();
+            return removeFirst();
         }
 
         ListItem<T> nextLink = head;
@@ -142,11 +128,10 @@ public class MyLinkedList<T> {
         return removableItemData;
     }
 
-    //Удаление узла по значению, пусть выдает true, если элемент был удален
-    public boolean removeItemByData(T data) {
+    public boolean removeByData(T data) {
         for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.next) {
             if (data == head.data) {
-                removeFirstItem();
+                removeFirst();
                 return true;
             }
 
@@ -161,8 +146,7 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    //Удаление первого элемента, пусть выдает значение элемента
-    public T removeFirstItem() {
+    public T removeFirst() {
         T removableItemData = head.data;
 
         head = head.next;
@@ -172,12 +156,11 @@ public class MyLinkedList<T> {
         return removableItemData;
     }
 
-    //Разворот списка за линейное время
     public void reverseMyLinkedList() {
         ListItem<T> currentLink = head;
         ListItem<T> prevLink = null;
-        ListItem<T> nextLink = null;
-        
+        ListItem<T> nextLink;
+
         while (currentLink != null) {
             nextLink = currentLink.next;
             currentLink.next = prevLink;
@@ -187,13 +170,24 @@ public class MyLinkedList<T> {
         head = prevLink;
     }
 
-    //Печать списка
-    public void printList() {
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
         ListItem<T> nextLink = head;
 
+        stringBuilder.append("[ ");
+        int i = 0;
         while (nextLink != null) {
-            System.out.println("Адрес: " + nextLink.next + " Значение: " + nextLink.data + " Count: " + size());
+            if (i == size() - 1) {
+                stringBuilder.append(nextLink.data);
+            } else {
+                stringBuilder.append(nextLink.data).append(", ");
+            }
             nextLink = nextLink.next;
+            ++i;
         }
+        stringBuilder.append(" ]");
+
+        return stringBuilder.toString();
     }
 }
