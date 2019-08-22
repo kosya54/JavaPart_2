@@ -4,52 +4,27 @@ import com.MyLinkedList.*;
 
 public class Main {
     public static void main(String[] args) {
-        MyLinkedList<Integer> list = new MyLinkedList<>();
+        MyLinkedList<Integer> list1 = new MyLinkedList<>();
+        
+        int listLength = 10;
+        for (int i = 0, j = 1; i < listLength; i++, j *= 3) {
+            list1.addFirstItem(j);
+        }
+        
+        list1.addItemByIndex();
+        list1.size();
+        list1.getFirstItemData();
+        list1.getItemDataByIndex();
+        list1.replaceItemDataByIndex();
+        list1.removeItemByIndex();
+        list1.removeItemByData();
+        list1.removeFirstItem();
+        list1.reverseMyLinkedList();
+        list1.printList();
+        
+        MyLinkedList<Integer> list2 = list1.copyMyLinkedList();
+        
+                
 
-        list.addFirstItem(1);
-        list.addFirstItem(2);
-        list.addFirstItem(3);
-        list.addFirstItem(4);
-        list.printList();
-
-        System.out.println(list.removeItemByData(0));
-        list.printList();
-
-/*        MyLinkedList<Integer> list = new MyLinkedList<>();
-
-        list.addFirst(1);
-        list.addFirst(2);
-        list.addFirst(3);
-        list.addFirst(4);
-
-        System.out.println("First item data: " + list.getFirstItemData());
-
-        list.printList();
-        System.out.println("Size: " + list.size());
-
-        list.addByIndex(1, 11);
-        list.printList();
-        System.out.println("Size: " + list.size());
-
-        System.out.println(list.getByIndex(3));
-        System.out.println(list.replaceByIndex(1, 22));
-        list.printList();
-
-        System.out.println(list.removeFirst());
-        list.printList();
-
-        System.out.println("Удалено? " + list.removeByData(4));
-        list.printList();
-
-        System.out.println("Удаленный элемент: " + list.removeByIndex(2));
-        list.printList();
-
-        list.printList();
-        list.printLinks();
-
-        MyLinkedList<Integer> copyList = list.copy();
-
-        copyList.printList();
-        copyList.printLinks(); */
     }
 }
