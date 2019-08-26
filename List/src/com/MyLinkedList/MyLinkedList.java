@@ -15,9 +15,17 @@ public class MyLinkedList<T> {
             this.next = next;
             this.data = data;
         }
+        
+        private ListItem<T> getNext() {
+            return next;
+        }
 
         private void setNext(ListItem<T> next) {
             this.next = next;
+        }
+        
+        private T getData() {
+            return data;
         }
 
         private void setData(T data) {
@@ -33,7 +41,7 @@ public class MyLinkedList<T> {
 
     public void addByIndex(int index, T data) {
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         if (index == 0) {
@@ -44,7 +52,7 @@ public class MyLinkedList<T> {
 
             for (int i = 0; i < index; i++) {
                 prevLink = nextLink;
-                nextLink = nextLink.next;
+                nextLink = nextLink.getNext();
             }
 
             ListItem<T> newItem = new ListItem<>(nextLink, data);
@@ -57,11 +65,12 @@ public class MyLinkedList<T> {
     public MyLinkedList<T> copyMyLinkedList() {
         MyLinkedList<T> copyList = new MyLinkedList<>();
 
-        for (ListItem<T> nextLink = head; nextLink != null; nextLink = nextLink.next) {
-            copyList.addFirstItem(nextLink.data);
+        for (ListItem<T> nextLink = head; nextLink != null; nextLink = nextLink.getNext()) {
+            copyList.addFirstItem(nextLink.getData());
         }
 
         copyList.reverseMyLinkedList();
+        
         return copyList;
     }
 
@@ -70,12 +79,12 @@ public class MyLinkedList<T> {
     }
 
     public T getFirstData() {
-        return head.data;
+        return head.getData();
     }
 
     public T getDataByIndex(int index) {
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         if (index == 0) {
@@ -84,22 +93,22 @@ public class MyLinkedList<T> {
 
         ListItem<T> nextLink = head;
         for (int i = 0; i < index; i++) {
-            nextLink = nextLink.next;
+            nextLink = nextLink.getNext();
         }
-        return nextLink.data;
+        return nextLink.getData();
     }
 
     public T replaceDataByIndex(int index, T data) {
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         ListItem<T> nextLink = head;
         for (int i = 0; i < index; i++) {
-            nextLink = nextLink.next;
+            nextLink = nextLink.getNext();
         }
 
-        T oldItemData = nextLink.data;
+        T oldItemData = nextLink.getData();
         nextLink.setData(data);
 
         return oldItemData;
@@ -107,7 +116,7 @@ public class MyLinkedList<T> {
 
     public T removeByIndex(int index) {
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         if (index == 0) {
@@ -118,25 +127,26 @@ public class MyLinkedList<T> {
         ListItem<T> prevLink = null;
         for (int i = 0; i < index; i++) {
             prevLink = nextLink;
-            nextLink = nextLink.next;
+            nextLink = nextLink.getNext();
         }
 
-        T removableItemData = nextLink.data;
-        prevLink.setNext(nextLink.next);
+        T removableItemData = nextLink.getData();
+        prevLink.setNext(nextLink.getNext());
 
         --count;
+        
         return removableItemData;
     }
 
     public boolean removeByData(T data) {
-        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.next) {
-            if (data == head.data) {
+        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.getNext()) {
+            if (data.equals(head.getData())) {
                 removeFirst();
                 return true;
             }
 
-            if (nextLink.data == data) {
-                prevLink.setNext(nextLink.next);
+            if (nextLink.getData() == data) {
+                prevLink.setNext(nextLink.getNext());
                 nextLink.setNext(null);
 
                 --count;
@@ -147,9 +157,9 @@ public class MyLinkedList<T> {
     }
 
     public T removeFirst() {
-        T removableItemData = head.data;
+        T removableItemData = head.getData();
 
-        head = head.next;
+        head = head.getNext();
 
         --count;
 
@@ -162,7 +172,7 @@ public class MyLinkedList<T> {
         ListItem<T> nextLink;
 
         while (currentLink != null) {
-            nextLink = currentLink.next;
+            nextLink = currentLink.getNext();
             currentLink.next = prevLink;
             prevLink = currentLink;
             currentLink = nextLink;
@@ -179,11 +189,11 @@ public class MyLinkedList<T> {
         int i = 0;
         while (nextLink != null) {
             if (i == size() - 1) {
-                stringBuilder.append(nextLink.data);
+                stringBuilder.append(nextLink.getData());
             } else {
-                stringBuilder.append(nextLink.data).append(", ");
+                stringBuilder.append(nextLink.getData()).append(", ");
             }
-            nextLink = nextLink.next;
+            nextLink = nextLink.getNext();
             ++i;
         }
         stringBuilder.append(" ]");
