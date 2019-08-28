@@ -16,13 +16,29 @@ public class MyLinkedList<T> {
             this.data = data;
         }
 
+        private ListItem<T> getNext() {
+            return next;
+        }
+
         private void setNext(ListItem<T> next) {
             this.next = next;
+        }
+
+        private T getData() {
+            return data;
         }
 
         private void setData(T data) {
             this.data = data;
         }
+    }
+
+    private ListItem<T> getListItem(int index) {
+        ListItem<T> nextLink = head;
+        for (int i = 0; i < index; i++) {
+            nextLink = nextLink.getNext();
+        }
+        return nextLink;
     }
 
     public void addFirstItem(T data) {
@@ -32,20 +48,15 @@ public class MyLinkedList<T> {
     }
 
     public void addByIndex(int index, T data) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+        if (index < 0 || index > count) {
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         if (index == 0) {
             addFirstItem(data);
         } else {
-            ListItem<T> nextLink = head;
-            ListItem<T> prevLink = null;
-
-            for (int i = 0; i < index; i++) {
-                prevLink = nextLink;
-                nextLink = nextLink.next;
-            }
+            ListItem<T> prevLink = getListItem(index - 1);
+            ListItem<T> nextLink = prevLink.getNext();
 
             ListItem<T> newItem = new ListItem<>(nextLink, data);
             prevLink.setNext(newItem);
@@ -54,14 +65,40 @@ public class MyLinkedList<T> {
         }
     }
 
+    public T removeByIndex(int index) {
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
+
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
+        }
+
+        if (index == 0) {
+            return removeFirst();
+        }
+
+        ListItem<T> prevLink = getListItem(index - 1);
+        ListItem<T> nextLink = prevLink.getNext();
+
+        T removableItemData = nextLink.getData();
+        prevLink.setNext(nextLink.getNext());
+
+        --count;
+
+        return removableItemData;
+    }
+
     public MyLinkedList<T> copyMyLinkedList() {
         MyLinkedList<T> copyList = new MyLinkedList<>();
 
-        for (ListItem<T> nextLink = head; nextLink != null; nextLink = nextLink.next) {
-            copyList.addFirstItem(nextLink.data);
+        int index = 0;
+        ListItem<T> nextLink = head;
+        while (nextLink != null) {
+            copyList.addByIndex(index, nextLink.getData());
+            nextLink = nextLink.getNext();
+            ++index;
         }
-
-        copyList.reverseMyLinkedList();
         return copyList;
     }
 
@@ -70,76 +107,68 @@ public class MyLinkedList<T> {
     }
 
     public T getFirstData() {
-        return head.data;
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
+
+        return head.getData();
     }
 
     public T getDataByIndex(int index) {
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
+
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
         if (index == 0) {
             return getFirstData();
         }
 
-        ListItem<T> nextLink = head;
-        for (int i = 0; i < index; i++) {
-            nextLink = nextLink.next;
-        }
-        return nextLink.data;
+        ListItem<T> nextLink = getListItem(index);
+
+        return nextLink.getData();
     }
 
     public T replaceDataByIndex(int index, T data) {
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
+
         if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
+            throw new IndexOutOfBoundsException("Не верное значение индекса");
         }
 
-        ListItem<T> nextLink = head;
-        for (int i = 0; i < index; i++) {
-            nextLink = nextLink.next;
-        }
+        ListItem<T> nextLink = getListItem(index);
 
-        T oldItemData = nextLink.data;
+        T oldItemData = nextLink.getData();
         nextLink.setData(data);
 
         return oldItemData;
     }
 
-    public T removeByIndex(int index) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Не верное значение индекса");
-        }
-
-        if (index == 0) {
-            return removeFirst();
-        }
-
-        ListItem<T> nextLink = head;
-        ListItem<T> prevLink = null;
-        for (int i = 0; i < index; i++) {
-            prevLink = nextLink;
-            nextLink = nextLink.next;
-        }
-
-        T removableItemData = nextLink.data;
-        prevLink.setNext(nextLink.next);
-
-        --count;
-        return removableItemData;
-    }
-
     public boolean removeByData(T data) {
-        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.next) {
-            if (data == head.data) {
-                removeFirst();
-                return true;
-            }
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
 
-            if (nextLink.data == data) {
-                prevLink.setNext(nextLink.next);
+        if (data.equals(head.getData())) {
+            removeFirst();
+
+            return true;
+        }
+
+        for (ListItem<T> nextLink = head, prevLink = null; nextLink != null; prevLink = nextLink, nextLink = nextLink.getNext()) {
+            if (data.equals(nextLink.getData())) {
+                if (prevLink != null) {
+                    prevLink.setNext(nextLink.getNext());
+                }
                 nextLink.setNext(null);
 
                 --count;
+
                 return true;
             }
         }
@@ -147,9 +176,13 @@ public class MyLinkedList<T> {
     }
 
     public T removeFirst() {
-        T removableItemData = head.data;
+        if (head == null) {
+            throw new IllegalStateException("Список пуст.");
+        }
 
-        head = head.next;
+        T removableItemData = head.getData();
+
+        head = head.getNext();
 
         --count;
 
@@ -162,7 +195,7 @@ public class MyLinkedList<T> {
         ListItem<T> nextLink;
 
         while (currentLink != null) {
-            nextLink = currentLink.next;
+            nextLink = currentLink.getNext();
             currentLink.next = prevLink;
             prevLink = currentLink;
             currentLink = nextLink;
@@ -179,11 +212,11 @@ public class MyLinkedList<T> {
         int i = 0;
         while (nextLink != null) {
             if (i == size() - 1) {
-                stringBuilder.append(nextLink.data);
+                stringBuilder.append(nextLink.getData());
             } else {
-                stringBuilder.append(nextLink.data).append(", ");
+                stringBuilder.append(nextLink.getData()).append(", ");
             }
-            nextLink = nextLink.next;
+            nextLink = nextLink.getNext();
             ++i;
         }
         stringBuilder.append(" ]");
