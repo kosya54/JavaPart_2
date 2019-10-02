@@ -77,9 +77,9 @@ public class TemperatureView extends JFrame {
                 String leftDegreeScale = (String) leftSelect.getSelectedItem();
                 String rightDegreeScale = (String) rightSelect.getSelectedItem();
 
-                String translatedDegrees = TemperatureController.callModelMethod(enteredDegrees, leftDegreeScale, rightDegreeScale);
+                String convertedDegrees = TemperatureController.callModelMethod(enteredDegrees, leftDegreeScale, rightDegreeScale);
 
-                result.setText(translatedDegrees);
+                result.setText(convertedDegrees);
             } else {
                 JOptionPane.showMessageDialog(panel, "Введите число");
             }
