@@ -1,19 +1,20 @@
 package com.controllers;
 
 import com.interfaces.DegreeScale;
+
 import com.models.Celsius;
 import com.models.Fahrenheit;
 import com.models.Kelvin;
 
+import java.util.ArrayList;
+
 public class ScalesController {
-    private DegreeScale celsius;
-    private DegreeScale kelvin;
-    private DegreeScale fahrenheit;
+    private ArrayList<DegreeScale> scales = new ArrayList<>();
 
     public ScalesController() {
-        celsius = new Celsius();
-        kelvin = new Kelvin();
-        fahrenheit = new Fahrenheit();
+        scales.add(new Celsius());
+        scales.add(new Kelvin());
+        scales.add(new Fahrenheit());
     }
 
     public static boolean isNumber(String enteredDegrees) {
@@ -24,8 +25,26 @@ public class ScalesController {
         return isDigit;
     }
 
-    public String[] getCyrillicName() {
-        return new String[] {celsius.getCyrillicName(), kelvin.getCyrillicName(), fahrenheit.getCyrillicName()};
+    public String[] getCyrillicNamesArray() {
+        String[] names = new String[scales.size()];
+
+        int i = 0;
+        for (DegreeScale scale : scales) {
+            names[i] = scale.getCyrillicName();
+            ++i;
+        }
+
+        return names;
     }
 
+    public double callModelMethod(double degrees, String fromScale, String toScale) {
+        double convertedDegree = 0;
+        for (DegreeScale scale : scales) {
+            if (scale.getCyrillicName().equals(fromScale)) {
+                convertedDegree = scale.convertScale(degrees, toScale);
+                break;
+            }
+        }
+        return convertedDegree;
+    }
 }

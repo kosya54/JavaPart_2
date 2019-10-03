@@ -3,20 +3,22 @@ package com.models;
 import com.interfaces.DegreeScale;
 
 public class Celsius implements DegreeScale {
-    private String cyrillicName = "Цельсия";
-    private double degrees;
+    private String cyrillicName;
 
     public Celsius() {
-
-    }
-
-    public Celsius(double degrees) {
-        this.degrees = degrees;
+        cyrillicName = "Цельсия";
     }
 
     @Override
-    public double convertScale() {
-        return 0;
+    public double convertScale(double degrees, String toScale) {
+        if (toScale.equals("Кельвина")) {
+            return toKelvin(degrees);
+        }
+
+        if (toScale.equals("Фаренгейта")) {
+            return toFahrenheit(degrees);
+        }
+        return degrees;
     }
 
     @Override
@@ -24,11 +26,11 @@ public class Celsius implements DegreeScale {
         return cyrillicName;
     }
 
-    private double toKelvin() {
+    private double toKelvin(double degrees) {
         return degrees + 273.15;
     }
 
-    private double toFahrenheit() {
+    private double toFahrenheit(double degrees) {
         return (degrees * 9 / 5) + 32;
     }
 }
