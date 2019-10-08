@@ -1,20 +1,12 @@
 package com.controllers;
 
-import com.interfaces.DegreeScale;
-
-import com.models.Celsius;
-import com.models.Fahrenheit;
-import com.models.Kelvin;
-
-import java.util.ArrayList;
+import com.models.TemperatureModel;
 
 public class ScalesController {
-    private ArrayList<DegreeScale> scales = new ArrayList<>();
+    private TemperatureModel temperatureModel;
 
     public ScalesController() {
-        scales.add(new Celsius());
-        scales.add(new Kelvin());
-        scales.add(new Fahrenheit());
+        temperatureModel = new TemperatureModel();
     }
 
     public static boolean isNumber(String enteredDegrees) {
@@ -25,26 +17,17 @@ public class ScalesController {
         return isDigit;
     }
 
-    public String[] getCyrillicNamesArray() {
-        String[] names = new String[scales.size()];
+    public String[] getCyrillicNames() {
+        String[] cyrillicNames = new String[temperatureModel.getCyrillicNames().size()];
 
-        int i = 0;
-        for (DegreeScale scale : scales) {
-            names[i] = scale.getCyrillicName();
-            ++i;
-        }
-
-        return names;
+        return temperatureModel.getCyrillicNames().toArray(cyrillicNames);
     }
 
-    public double callModelMethod(double degrees, String fromScale, String toScale) {
-        double convertedDegree = 0;
-        for (DegreeScale scale : scales) {
-            if (scale.getCyrillicName().equals(fromScale)) {
-                convertedDegree = scale.convertScale(degrees, toScale);
-                break;
-            }
+    public double callModelMethod(double degrees, String from, String to) {
+        if (from.equals(to)) {
+            return degrees;
         }
-        return convertedDegree;
+
+        return temperatureModel.convertScales(degrees, from + " " + to);
     }
 }

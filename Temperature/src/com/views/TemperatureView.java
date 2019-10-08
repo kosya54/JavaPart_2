@@ -76,7 +76,7 @@ public class TemperatureView {
 
         panel.add(result, constraints);
 
-        leftSelect = new JComboBox<>(scalesController.getCyrillicNamesArray());
+        leftSelect = new JComboBox<>(scalesController.getCyrillicNames());
         leftSelect.setBackground(Color.WHITE);
 
         constraints.gridx = 0;
@@ -84,7 +84,7 @@ public class TemperatureView {
 
         panel.add(leftSelect, constraints);
 
-        rightSelect = new JComboBox<>(scalesController.getCyrillicNamesArray());
+        rightSelect = new JComboBox<>(scalesController.getCyrillicNames());
         rightSelect.setBackground(Color.WHITE);
 
         constraints.gridx = 2;
@@ -101,15 +101,19 @@ public class TemperatureView {
         panel.add(convertButton, constraints);
 
         convertButton.addActionListener(e -> {
-            if (ScalesController.isNumber(input.getText()) && leftSelect.getSelectedItem() != null && rightSelect.getSelectedItem() != null) {
+            if (leftSelect.getSelectedItem() == null || rightSelect.getSelectedItem() == null) {
+                throw new NullPointerException("Шкалы не существует.");
+            }
+
+            if (ScalesController.isNumber(input.getText())) {
                 double enteredDegrees = Double.parseDouble(input.getText());
 
-                String fromScale = (String) leftSelect.getSelectedItem();
-                String toScale = (String) rightSelect.getSelectedItem();
+                String from = (String) leftSelect.getSelectedItem();
+                String to = (String) rightSelect.getSelectedItem();
 
-                String convertedDegrees = Double.toString(scalesController.callModelMethod(enteredDegrees, fromScale, toScale));
+                double convertedDegrees = scalesController.callModelMethod(enteredDegrees, from, to);
 
-                result.setText(convertedDegrees);
+                result.setText(String.format("%.2f", convertedDegrees));
             } else {
                 JOptionPane.showMessageDialog(panel, "Введите число");
             }
