@@ -27,7 +27,6 @@ public class ScalesController {
         if (from.equals(to)) {
             return degrees;
         }
-
         return temperatureModel.convertScales(degrees, from + " " + to);
     }
 }
