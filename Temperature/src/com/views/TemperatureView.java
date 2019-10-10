@@ -105,20 +105,21 @@ public class TemperatureView {
                 throw new NullPointerException("Шкалы не существует.");
             }
 
-            if (ScalesController.isNumber(input.getText())) {
-                double enteredDegrees = Double.parseDouble(input.getText());
-
-                String from = (String) leftSelect.getSelectedItem();
-                String to = (String) rightSelect.getSelectedItem();
-
-                double convertedDegrees = scalesController.callModelMethod(enteredDegrees, from, to);
-
-                result.setText(String.format("%.2f", convertedDegrees));
-            } else {
+            if (!ScalesController.isNumber(input.getText())) {
                 JOptionPane.showMessageDialog(panel, "Введите число");
-            }
-        });
 
+                return;
+            }
+
+            double enteredDegrees = Double.parseDouble(input.getText());
+
+            String from = (String) leftSelect.getSelectedItem();
+            String to = (String) rightSelect.getSelectedItem();
+
+            double convertedDegrees = scalesController.callModelMethod(enteredDegrees, from, to);
+
+            result.setText(String.format("%.2f", convertedDegrees));
+        });
         return panel;
     }
 

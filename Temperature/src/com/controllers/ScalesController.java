@@ -10,11 +10,13 @@ public class ScalesController {
     }
 
     public static boolean isNumber(String enteredDegrees) {
-        boolean isDigit = false;
+        int noDigitCount = 0;
         for (int i = 0; i < enteredDegrees.length(); i++) {
-            isDigit = Character.isDigit(enteredDegrees.charAt(i));
+            if (!Character.isDigit(enteredDegrees.charAt(i))) {
+                ++noDigitCount;
+            }
         }
-        return isDigit;
+        return noDigitCount <= 0;
     }
 
     public String[] getCyrillicNames() {
