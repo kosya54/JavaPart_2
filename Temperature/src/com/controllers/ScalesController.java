@@ -60,7 +60,7 @@ public class ScalesController {
         }
         return degrees;
     }
-
+/* TODO: Сделать проверку на существование методов интерфейса в классах или проверку, что классы реализуют интерфейс */
     private void loadScales() {
         final String modelsPackage = "com.models.";
 
