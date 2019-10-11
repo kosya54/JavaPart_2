@@ -76,7 +76,7 @@ public class TemperatureView {
 
         panel.add(result, constraints);
 
-        leftSelect = new JComboBox<>(scalesController.getCyrillicNames());
+        leftSelect = new JComboBox<>(scalesController.getScalesNames());
         leftSelect.setBackground(Color.WHITE);
 
         constraints.gridx = 0;
@@ -84,7 +84,7 @@ public class TemperatureView {
 
         panel.add(leftSelect, constraints);
 
-        rightSelect = new JComboBox<>(scalesController.getCyrillicNames());
+        rightSelect = new JComboBox<>(scalesController.getScalesNames());
         rightSelect.setBackground(Color.WHITE);
 
         constraints.gridx = 2;
@@ -116,7 +116,7 @@ public class TemperatureView {
             String from = (String) leftSelect.getSelectedItem();
             String to = (String) rightSelect.getSelectedItem();
 
-            double convertedDegrees = scalesController.callModelMethod(enteredDegrees, from, to);
+            double convertedDegrees = scalesController.convertScales(enteredDegrees, from, to);
 
             result.setText(String.format("%.2f", convertedDegrees));
         });
