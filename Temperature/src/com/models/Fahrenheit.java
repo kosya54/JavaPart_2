@@ -9,6 +9,7 @@ public class Fahrenheit implements DegreeScale {
         name = "Фаренгейта";
     }
 
+    @Override
     public String getName() {
         return name;
     }

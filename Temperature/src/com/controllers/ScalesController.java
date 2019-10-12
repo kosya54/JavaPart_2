@@ -3,10 +3,13 @@ package com.controllers;
 import com.interfaces.DegreeScale;
 
 import java.io.File;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -60,7 +63,7 @@ public class ScalesController {
         }
         return degrees;
     }
-/* TODO: Сделать проверку на существование методов интерфейса в классах или проверку, что классы реализуют интерфейс */
+
     private void loadScales() {
         final String modelsPackage = "com.models.";
 
@@ -73,16 +76,32 @@ public class ScalesController {
         if (listOfFiles != null) {
             for (File listOfFile : listOfFiles) {
                 String name = modelsPackage + formatName(listOfFile.getName());
+
                 try {
                     Class<?> cls = Class.forName(name);
-                    Constructor constructor = cls.getConstructor();
-                    DegreeScale scale = (DegreeScale) constructor.newInstance();
-                    scales.put(scale.getName(), scale);
+                    if (isImplementsDegreeScale(cls)) {
+                        Constructor constructor = cls.getConstructor();
+
+                        DegreeScale scale = (DegreeScale) constructor.newInstance();
+                        scales.put(scale.getName(), scale);
+                    }
                 } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    private boolean isImplementsDegreeScale(Class cls) {
+        final String interfaceName = "com.interfaces.DegreeScale";
+
+        Class[] interfaces = cls.getInterfaces();
+        for (Class interfaceValue : interfaces) {
+            if (interfaceValue.getName().equals(interfaceName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private String formatName(String name) {

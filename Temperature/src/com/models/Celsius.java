@@ -9,6 +9,7 @@ public class Celsius implements DegreeScale {
         name = "Цельсия";
     }
 
+    @Override
     public String getName() {
         return name;
     }

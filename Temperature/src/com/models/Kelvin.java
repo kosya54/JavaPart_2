@@ -9,6 +9,7 @@ public class Kelvin implements DegreeScale {
         name = "Кельвин";
     }
 
+    @Override
     public String getName() {
         return name;
     }

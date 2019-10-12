@@ -8,11 +8,9 @@ import java.awt.*;
 public class TemperatureView {
     private JFrame frame;
 
-    private JTextField input;
-    private JTextField result;
+    private JTextField input, result;
 
-    private JComboBox<String> leftSelect;
-    private JComboBox<String> rightSelect;
+    private JComboBox<String> leftSelect, rightSelect;
 
     private GridBagConstraints constraints;
     private ScalesController scalesController;
@@ -50,7 +48,7 @@ public class TemperatureView {
     private JPanel createGUI() {
         JPanel panel = new JPanel(new GridBagLayout());
 
-        input = new JTextField(10);
+        input = new JTextField("0", 10);
         input.setFont(font);
         input.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -102,7 +100,7 @@ public class TemperatureView {
 
         convertButton.addActionListener(e -> {
             if (leftSelect.getSelectedItem() == null || rightSelect.getSelectedItem() == null) {
-                throw new NullPointerException("Шкалы не существует.");
+                throw new IllegalArgumentException("Шкалы не существует.");
             }
 
             if (!ScalesController.isNumber(input.getText())) {
