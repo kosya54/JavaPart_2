@@ -8,9 +8,11 @@ import java.awt.*;
 public class TemperatureView {
     private JFrame frame;
 
-    private JTextField input, result;
+    private JTextField input;
+    private JTextField result;
 
-    private JComboBox<String> leftSelect, rightSelect;
+    private JComboBox<String> leftSelect;
+    private JComboBox<String> rightSelect;
 
     private GridBagConstraints constraints;
     private ScalesController scalesController;

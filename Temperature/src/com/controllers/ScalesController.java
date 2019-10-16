@@ -22,13 +22,12 @@ public class ScalesController {
     }
 
     public static boolean isNumber(String enteredDegrees) {
-        int noDigitCount = 0;
         for (int i = 0; i < enteredDegrees.length(); i++) {
             if (!Character.isDigit(enteredDegrees.charAt(i))) {
-                ++noDigitCount;
+                return false;
             }
         }
-        return noDigitCount <= 0;
+        return true;
     }
 
     public String[] getScalesNames() {
@@ -48,19 +47,9 @@ public class ScalesController {
             return degrees;
         }
 
-        Set<Map.Entry<String, DegreeScale>> scalesEntry = scales.entrySet();
+        degrees = scales.get(from).toCelsius(degrees);
+        degrees = scales.get(to).fromCelsius(degrees);
 
-        for (Map.Entry<String, DegreeScale> scale : scalesEntry) {
-            if (from.equals(scale.getKey())) {
-                degrees = scale.getValue().toCelsius(degrees);
-            }
-        }
-
-        for (Map.Entry<String, DegreeScale> scale : scalesEntry) {
-            if (to.equals(scale.getKey())) {
-                degrees = scale.getValue().fromCelsius(degrees);
-            }
-        }
         return degrees;
     }
 

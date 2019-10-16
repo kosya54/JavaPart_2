@@ -2,16 +2,10 @@ package com.models;
 
 import com.interfaces.DegreeScale;
 
-public class Fahrenheit implements DegreeScale {
-    private String name;
-
-    public Fahrenheit() {
-        name = "Фаренгейта";
-    }
-
+public class FahrenheitDegreeScale implements DegreeScale {
     @Override
     public String getName() {
-        return name;
+        return "Фаренгейта";
     }
 
     @Override

@@ -2,25 +2,19 @@ package com.models;
 
 import com.interfaces.DegreeScale;
 
-public class Kelvin implements DegreeScale {
-    private String name;
-
-    public Kelvin() {
-        name = "Кельвин";
-    }
-
+public class CelsiusDegreeScale implements DegreeScale {
     @Override
     public String getName() {
-        return name;
+        return "Цельсия";
     }
 
     @Override
     public double toCelsius(double degrees) {
-        return degrees - 273.15;
+        return degrees;
     }
 
     @Override
     public double fromCelsius(double degrees) {
-        return degrees + 273.15;
+        return degrees;
     }
 }
