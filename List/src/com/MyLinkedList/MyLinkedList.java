@@ -89,7 +89,7 @@ public class MyLinkedList<T> {
         return removableItemData;
     }
 
-    public MyLinkedList<T> copyMyLinkedList() {
+    public MyLinkedList<T> copy() {
         MyLinkedList<T> copyList = new MyLinkedList<>();
 
         int index = 0;
@@ -189,7 +189,7 @@ public class MyLinkedList<T> {
         return removableItemData;
     }
 
-    public void reverseMyLinkedList() {
+    public void reverse() {
         ListItem<T> currentLink = head;
         ListItem<T> prevLink = null;
         ListItem<T> nextLink;

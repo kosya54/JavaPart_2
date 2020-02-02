@@ -38,7 +38,7 @@ public class Main {
         System.out.println("Удаляем первый элемент: " + list1);
         System.out.println();
 
-        list1.reverseMyLinkedList();
+        list1.reverse();
         System.out.println("Разворчиваем список: " + list1);
         System.out.println();
 
@@ -46,7 +46,7 @@ public class Main {
         System.out.println();
 
         System.out.println("Копируем List1 в List2 и удаляем у List2 по индексу 3.");
-        MyLinkedList<Integer> list2 = list1.copyMyLinkedList();
+        MyLinkedList<Integer> list2 = list1.copy();
 
         list2.removeByIndex(3);
 
