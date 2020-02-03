@@ -47,10 +47,9 @@ public class ScalesController {
             return degrees;
         }
 
-        degrees = scales.get(from).toCelsius(degrees);
-        degrees = scales.get(to).fromCelsius(degrees);
+        double temporaryDegrees = scales.get(from).toCelsius(degrees);
 
-        return degrees;
+        return scales.get(to).fromCelsius(temporaryDegrees);
     }
 
     private void loadScales() {
