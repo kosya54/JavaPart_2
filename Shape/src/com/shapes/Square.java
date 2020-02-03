@@ -32,11 +32,15 @@ public class Square implements Shape {
     @Override
     public String toString() {
         return String.format("Фигура: %s.%n" +
-                             "Ширина: %.2f.%n" +
-                             "Площадь: %.2f.%n" +
-                             "Периметр: %.2f.%n" +
-                             "Хэш: %d.",
-                             getClass().getSimpleName(), width, getArea(), getPerimeter(), hashCode());
+                        "Ширина: %.2f.%n" +
+                        "Площадь: %.2f.%n" +
+                        "Периметр: %.2f.%n" +
+                        "Хэш: %d.",
+                getClass().getSimpleName(),
+                width,
+                getArea(),
+                getPerimeter(),
+                hashCode());
     }
 
     @Override

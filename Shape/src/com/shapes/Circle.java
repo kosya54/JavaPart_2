@@ -32,11 +32,15 @@ public class Circle implements Shape {
     @Override
     public String toString() {
         return String.format("Фигура: %s.%n" +
-                             "Радиус: %.2f.%n" +
-                             "Площадь: %.2f.%n" +
-                             "Периметр: %.2f.%n" +
-                             "Хэш: %d.",
-                             getClass().getSimpleName(), radius, getArea(), getPerimeter(), hashCode());
+                        "Радиус: %.2f.%n" +
+                        "Площадь: %.2f.%n" +
+                        "Периметр: %.2f.%n" +
+                        "Хэш: %d.",
+                getClass().getSimpleName(),
+                radius,
+                getArea(),
+                getPerimeter(),
+                hashCode());
     }
 
     @Override

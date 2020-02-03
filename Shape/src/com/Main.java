@@ -28,10 +28,10 @@ class Main {
         Shape square2 = new Square(50);
         shapes.add(square2);
 
-        Shape triangle1 = new Triangle(5, 7, 9, 11, 2, 4);
+        Shape triangle1 = new Triangle(3, 7, 1, 2, 7, 4);
         shapes.add(triangle1);
 
-        Shape triangle2 = new Triangle(1, 3, 5, 7, 9, 11);
+        Shape triangle2 = new Triangle(1, 3, 5, 7, 1, 10);
         shapes.add(triangle2);
 
         System.out.printf("Фигура с максимальной площадью.%n%s%n%n", getMaxAreaShape(shapes).toString());
