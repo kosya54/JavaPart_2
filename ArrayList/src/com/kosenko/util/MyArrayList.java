@@ -1,38 +1,55 @@
 package com.kosenko.util;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MyArrayList<E> implements List<E> {
+    private static final int DEFAULT_CAPACITY = 10;
     private E[] items;
     private int size;
 
     public MyArrayList() {
         //noinspection unchecked
-        items = (E[]) new Object[10];
+        items = (E[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
+    //TODO: Сделать проверку на максимальное число Int и отрицательное число
     public MyArrayList(int capacity) {
         //noinspection unchecked
         items = (E[]) new Object[capacity];
         size = capacity;
     }
 
-    //Completed
+    private void checkIndexesRange(int index) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Индекс не может быть меньше 0.");
+        }
+
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Индекс выходит за границу " + this.getClass().getSimpleName());
+        }
+    }
+
+    private void expandCapacity() {
+        E[] temp = items;
+        //noinspection unchecked
+        items = (E[]) new Object[temp.length + DEFAULT_CAPACITY];
+
+        System.arraycopy(temp, 0, items, 0, temp.length);
+    }
+
     @Override
     public int size() {
         return size;
     }
 
-    //TODO: Сделать проверку на существование индекса, а так же сейчас возвращает null, если в массиве 1 элемент и стоит не по переданному индексу
     @Override
     public E get(int index) {
-        System.out.println("--->" + items[index]);
+        checkIndexesRange(index);
+
         return items[index];
     }
 
-    //TODO: Сделать проверку на существование индекса
     @Override
     public E set(int index, E element) {
         E oldValue = get(index);
@@ -41,44 +58,49 @@ public class MyArrayList<E> implements List<E> {
         return oldValue;
     }
 
-    //TODO: Переделать добавление, сейчас если изначальный массив состоит из null, элементы просто добавляются в конец
+    //TODO: Как быть если записано несколько null подряд?
     @Override
     public boolean add(E e) {
-        try {
-            E[] temp = items;
-            //noinspection unchecked
-            items = (E[]) new Object[temp.length + 1];
-            System.arraycopy(temp, 0, items, 0, temp.length);
+        boolean isAdded = false;
 
-            items[items.length - 1] = e;
-            ++size;
-
-            return true;
-        } catch (ClassCastException ex) {
-            ex.printStackTrace();
-        }
-
-        return false;
-    }
-
-    //TODO: Не работает
-    @Override
-    public void add(int index, E element) {
-        try {
-            E[] temp = items;
-            //noinspection unchecked
-            items = (E[]) new Object[temp.length + 1];
-            System.arraycopy(temp, 0, items, 0, temp.length);
-
-            for (int i = items.length - 1, j = items.length - 2; i >= index; i--, j--) {
-                items[i] = items[j];
+        if (size >= 0) {
+            if (size == items.length) {
+                expandCapacity();
             }
 
-            items[index] = element;
-            ++size;
-        } catch (ClassCastException ex) {
-            ex.printStackTrace();
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] == null) {
+                    items[i] = e;
+                    ++size;
+
+                    isAdded = true;
+                    break;
+                }
+            }
         }
+        return isAdded;
+    }
+
+    @Override
+    public void add(int index, E element) {
+        if (index == size) {
+            add(element);
+
+            return;
+        }
+
+        checkIndexesRange(index);
+
+        if (size == items.length) {
+            expandCapacity();
+        }
+
+        if (size - index >= 0) {
+            System.arraycopy(items, index, items, index + 1, size - index);
+        }
+
+        items[index] = element;
+        ++size;
     }
 
     @Override
@@ -86,11 +108,17 @@ public class MyArrayList<E> implements List<E> {
         return size == 0;
     }
 
-
     @Override
     public boolean contains(Object o) {
+        for (E item : items) {
+            if (item.equals(o)) {
+                return true;
+            }
+        }
+
         return false;
     }
+
 
     @Override
     public Iterator<E> iterator() {
@@ -200,7 +228,8 @@ public class MyArrayList<E> implements List<E> {
             }
         }
 
-        return Arrays.toString(new Array[0]);
+        //noinspection unchecked
+        return Arrays.toString((E[]) new Object[0]);
     }
 
     public String tempToString() {
