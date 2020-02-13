@@ -1,7 +1,9 @@
 package com.kosenko;
 
 import com.kosenko.util.MyArrayList;
+import org.w3c.dom.ls.LSOutput;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,28 +17,19 @@ public class Main {
         }
 
         ArrayList<Integer> test = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
-            test.add(3);
+        for (int i = 1; i <= 10; i++) {
+            test.add(i);
         }
 
-        myArrayList1.add(0, null);
-        myArrayList1.add(3, null);
-        myArrayList1.add(8, null);
-        myArrayList1.add(9, null);
-        myArrayList1.add(4, 99);
-        myArrayList1.add(7, 99);
-        myArrayList1.add(11, 99);
+        Iterator<Integer> iter = test.iterator();
 
-        List<Integer> temp = new ArrayList<>();
-        temp.add(1);
-        temp.add(99);
-        temp.add(null);
-        System.out.println(temp);
-        System.out.println(myArrayList1.size());
+        Iterator<Integer> iter2 = myArrayList1.iterator();
+        int i = 0;
         System.out.println(myArrayList1.tempToString());
-        System.out.println(myArrayList1.addAll(5, temp));
+        while (i < 15) {
+            iter2.remove();
+            ++i;
+        }
         System.out.println(myArrayList1.tempToString());
-
-//        System.out.println(myArrayList1.containsAll(test));
     }
 }

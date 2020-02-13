@@ -251,12 +251,6 @@ public class MyArrayList<E> implements List<E> {
             return false;
         }
 
-        if (index == size - 1) {
-            --size;
-
-            return true;
-        }
-
         System.arraycopy(items, index + 1, items, index, size - index);
         --size;
 
@@ -280,28 +274,84 @@ public class MyArrayList<E> implements List<E> {
         return removable;
     }
 
-
-
-
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
+        boolean isRemove = false;
+        for (Object item : c) {
+            if (contains(item)) {
+                remove(item);
+                isRemove = true;
+            }
+        }
+        return isRemove;
     }
 
     @Override
     public void clear() {
+        for (int i = 0; i < size; i++) {
+            items[i] = null;
+        }
 
+        size = 0;
     }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return true;
+    }
+
+
+    @Override
+    public Iterator<E> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator<E> {
+        private int pointer;
+        private boolean isAfterHasNext;
+
+        MyIterator() {
+            pointer = 0;
+            isAfterHasNext = false;
+        }
+
+        @Override
+        public boolean hasNext() {
+            isAfterHasNext = true;
+
+            return pointer < size;
+        }
+
+        @Override
+        public E next() {
+            if (!isAfterHasNext) {
+                throw new UnsupportedOperationException("Next");
+            }
+
+            int i = pointer;
+            if (i >= size) {
+                throw new NoSuchElementException();
+            }
+
+            ++pointer;
+
+            return items[i];
+        }
+
+        @Override
+        public void remove() {
+            if (!isAfterHasNext) {
+                throw new UnsupportedOperationException("Remove");
+            }
+
+            System.arraycopy(items, 1, items, 0, size);
+            --size;
+        }
+    }
+
+
+
+
 
 
     @Override
@@ -331,8 +381,7 @@ public class MyArrayList<E> implements List<E> {
             }
         }
 
-        //noinspection unchecked
-        return Arrays.toString((E[]) new Object[0]);
+        return Arrays.toString(new Object[0]);
     }
 
     public String tempToString() {
