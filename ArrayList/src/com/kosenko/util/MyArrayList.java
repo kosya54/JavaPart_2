@@ -13,11 +13,14 @@ public class MyArrayList<E> implements List<E> {
         size = 0;
     }
 
-    //TODO: Сделать проверку на максимальное число Int и отрицательное число
     public MyArrayList(int capacity) {
-        //noinspection unchecked
-        items = (E[]) new Object[capacity];
-        size = capacity;
+        if (capacity > 0) {
+            //noinspection unchecked
+            items = (E[]) new Object[capacity];
+            size = capacity;
+        } else {
+            throw new IllegalArgumentException("Не верный размер коллекции.");
+        }
     }
 
     private void checkIndexesRange(int index) {
@@ -297,7 +300,10 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return true;
+        boolean isRemoved = false;
+        int i = 0;
+
+        return isRemoved;
     }
 
 
@@ -348,10 +354,6 @@ public class MyArrayList<E> implements List<E> {
             --size;
         }
     }
-
-
-
-
 
 
     @Override

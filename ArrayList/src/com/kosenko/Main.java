@@ -17,19 +17,13 @@ public class Main {
         }
 
         ArrayList<Integer> test = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 5; i++) {
             test.add(i);
         }
 
-        Iterator<Integer> iter = test.iterator();
-
-        Iterator<Integer> iter2 = myArrayList1.iterator();
-        int i = 0;
-        System.out.println(myArrayList1.tempToString());
-        while (i < 15) {
-            iter2.remove();
-            ++i;
-        }
-        System.out.println(myArrayList1.tempToString());
+        System.out.printf("Collection: %s, size: %s%n", myArrayList1.tempToString(), myArrayList1.size());
+        System.out.printf("Collection for retain: %s%n", test);
+        myArrayList1.retainAll(test);
+        System.out.printf("Collection after retainAll: %s", myArrayList1.tempToString());
     }
 }
