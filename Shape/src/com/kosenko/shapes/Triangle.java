@@ -1,6 +1,6 @@
-package com.shapes;
+package com.kosenko.shapes;
 
-import com.interfaces.Shape;
+import com.kosenko.interfaces.Shape;
 
 public class Triangle implements Shape {
     private double x1;

@@ -1,6 +1,6 @@
-package com.shapes;
+package com.kosenko.shapes;
 
-import com.interfaces.Shape;
+import com.kosenko.interfaces.Shape;
 
 public class Rectangle implements Shape {
     private double width;
@@ -53,7 +53,7 @@ public class Rectangle implements Shape {
             return true;
         }
 
-        if (object == null || object.getClass() != this.getClass()) {
+        if (object == null || object.getClass() != getClass()) {
             return false;
         }
 
