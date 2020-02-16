@@ -92,6 +92,7 @@ public class Triangle implements Shape {
         hash = prime * hash + Double.hashCode(y2);
         hash = prime * hash + Double.hashCode(x3);
         hash = prime * hash + Double.hashCode(y3);
+
         return hash;
     }
 
