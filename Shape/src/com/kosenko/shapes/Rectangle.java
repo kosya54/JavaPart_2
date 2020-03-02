@@ -69,6 +69,7 @@ public class Rectangle implements Shape {
 
         hash = prime * hash + Double.hashCode(width);
         hash = prime * hash + Double.hashCode(height);
+
         return hash;
     }
 }
