@@ -10,16 +10,15 @@ public class MyArrayList<E> implements List<E> {
     public MyArrayList() {
         //noinspection unchecked
         elementData = (E[]) new Object[DEFAULT_CAPACITY];
-        size = 0;
     }
 
     public MyArrayList(int capacity) {
-        if (capacity > 0) {
-            //noinspection unchecked
-            elementData = (E[]) new Object[capacity];
-        } else {
+        if (capacity <= 0) {
             throw new IllegalArgumentException("Не верный размер коллекции.");
         }
+
+        //noinspection unchecked
+        elementData = (E[]) new Object[capacity];
     }
 
     private void checkIndexesRange(int index) {
@@ -28,7 +27,7 @@ public class MyArrayList<E> implements List<E> {
         }
 
         if (index >= size) {
-            throw new IndexOutOfBoundsException("Индекс выходит за границу " + this.getClass().getSimpleName());
+            throw new IndexOutOfBoundsException("Индекс выходит за границу " + size);
         }
     }
 
@@ -340,11 +339,13 @@ public class MyArrayList<E> implements List<E> {
 
     private class MyIterator implements Iterator<E> {
         private int pointer;
+        private int currentSize;
         private boolean isAfterHasNext;
 
         MyIterator() {
             pointer = 0;
             isAfterHasNext = false;
+            currentSize = size;
         }
 
         @Override
@@ -358,6 +359,10 @@ public class MyArrayList<E> implements List<E> {
         public E next() {
             if (!isAfterHasNext) {
                 throw new UnsupportedOperationException("Next");
+            }
+
+            if (currentSize > size || currentSize < size) {
+                throw new ConcurrentModificationException();
             }
 
             int i = pointer;
