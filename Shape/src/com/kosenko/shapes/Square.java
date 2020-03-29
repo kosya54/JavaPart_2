@@ -1,6 +1,6 @@
 package com.kosenko.shapes;
 
-import com.interfaces.Shape;
+import com.kosenko.interfaces.Shape;
 
 public class Square implements Shape {
     private double width;

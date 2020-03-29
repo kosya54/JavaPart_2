@@ -1,4 +1,4 @@
-package com.interfaces;
+package com.kosenko.interfaces;
 
 public interface DegreeScale {
     String getName();

@@ -1,7 +1,7 @@
 package com.kosenko;
 
 import com.kosenko.comparators.*;
-import com.interfaces.Shape;
+import com.kosenko.interfaces.Shape;
 import com.kosenko.shapes.*;
 
 import java.util.ArrayList;
@@ -30,6 +30,10 @@ class Main {
 
         Shape triangle1 = new Triangle(3, 7, 1, 2, 7, 4);
         shapes.add(triangle1);
+
+        System.out.println("------------------");
+        System.out.println(triangle1.getArea());
+        System.out.println("------------------");
 
         Shape triangle2 = new Triangle(1, 3, 5, 7, 1, 10);
         shapes.add(triangle2);

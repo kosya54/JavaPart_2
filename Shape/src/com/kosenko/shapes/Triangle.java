@@ -1,6 +1,6 @@
 package com.kosenko.shapes;
 
-import com.interfaces.Shape;
+import com.kosenko.interfaces.Shape;
 
 public class Triangle implements Shape {
     private double x1;
@@ -94,7 +94,7 @@ public class Triangle implements Shape {
         return hash;
     }
 
-    private double getSideLength(double coordinateX1, double coordinateY1, double coordinateX2, double coordinateY2) {
+    private static double getSideLength(double coordinateX1, double coordinateY1, double coordinateX2, double coordinateY2) {
         return Math.sqrt(Math.pow(coordinateX2 - coordinateX1, 2) + Math.pow(coordinateY2 - coordinateY1, 2));
     }
 

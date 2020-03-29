@@ -1,6 +1,6 @@
 package com.models;
 
-import com.interfaces.DegreeScale;
+import com.kosenko.interfaces.DegreeScale;
 
 public class KelvinDegreeScale implements DegreeScale {
     @Override
