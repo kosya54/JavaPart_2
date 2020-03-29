@@ -1,6 +1,6 @@
 package com.controllers;
 
-import com.kosenko.interfaces.DegreeScale;
+import com.interfaces.DegreeScale;
 
 import java.io.File;
 
@@ -81,7 +81,7 @@ public class ScalesController {
     }
 
     private boolean isImplementsDegreeScale(Class cls) {
-        final String interfaceName = "com.kosenko.interfaces.DegreeScale";
+        final String interfaceName = "com.interfaces.DegreeScale";
 
         Class[] interfaces = cls.getInterfaces();
         for (Class interfaceValue : interfaces) {

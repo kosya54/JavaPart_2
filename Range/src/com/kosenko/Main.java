@@ -1,6 +1,6 @@
-package com;
+package com.kosenko;
 
-import com.range.Range;
+import com.kosenko.range.Range;
 
 import java.util.Scanner;
 

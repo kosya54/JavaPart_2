@@ -1,4 +1,4 @@
-package com.kosenko.interfaces;
+package com.interfaces;
 
 public interface Shape {
     double getWidth();

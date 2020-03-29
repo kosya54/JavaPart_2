@@ -1,7 +1,7 @@
 package com.kosenko;
 
 import com.kosenko.comparators.*;
-import com.kosenko.interfaces.Shape;
+import com.interfaces.Shape;
 import com.kosenko.shapes.*;
 
 import java.util.ArrayList;

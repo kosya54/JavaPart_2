@@ -1,6 +1,6 @@
 package com.kosenko.comparators;
 
-import com.kosenko.interfaces.Shape;
+import com.interfaces.Shape;
 
 import java.util.Comparator;
 

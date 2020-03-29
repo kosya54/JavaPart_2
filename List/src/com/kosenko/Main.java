@@ -1,6 +1,6 @@
-package com;
+package com.kosenko;
 
-import com.MyLinkedList.*;
+import com.kosenko.MyLinkedList.*;
 
 public class Main {
     public static void main(String[] args) {

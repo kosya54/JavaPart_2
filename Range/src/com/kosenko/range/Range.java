@@ -1,4 +1,4 @@
-package com.range;
+package com.kosenko.range;
 
 public class Range {
     private double from;

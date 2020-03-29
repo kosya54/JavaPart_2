@@ -1,6 +1,6 @@
-package com;
+package com.kosenko;
 
-import com.vector.Vector;
+import com.kosenko.vector.Vector;
 
 class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.MyLinkedList;
+package com.kosenko.MyLinkedList;
 
 public class MyLinkedList<T> {
     private ListItem<T> head;

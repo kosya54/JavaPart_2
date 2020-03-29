@@ -1,4 +1,4 @@
-package com.vector;
+package com.kosenko.vector;
 
 import java.util.Arrays;
 
